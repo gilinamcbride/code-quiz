@@ -1,8 +1,9 @@
 var mainEl = document.querySelector("#main");
 var timerEl = document.querySelector("#timer");
-var timer =  {
-    timeStart: 60,
-}
+var timer = {
+  timeStart: 60,
+  // need a way to capture score from time
+};
 
 var mainHeader = document.createElement("h2");
 mainHeader.textContent = "Coding Quiz Challenge";
@@ -19,37 +20,55 @@ startBtn.className = "start-btn";
 mainEl.appendChild(startBtn);
 
 var questionsObj = [
-    {
-        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-        answers: ["1. Javascript", "2. Terminal/Bash", "3. For Loops", "4. Console.log"],
-        correct: "4. Console.log"
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: [
+      "1. Javascript",
+      "2. Terminal/Bash",
+      "3. For Loops",
+      "4. Console.log",
+    ],
+    correct: "4. Console.log",
+  },
+  {
+    question: "Commonly used data types do NOT include:",
+    answers: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
+    correct: "3. Alerts",
+  },
+  {
+    question: "The condition in an if/else statement is enclosed with _____.",
+    answers: [
+      "1. Quotes",
+      "2. Curly brackets",
+      "3. Parenthesis",
+      "4. Square brackets",
+    ],
+    correct: "3. Parenthesis",
+  },
+  {
+    question: "Arrays in Javascript can be used to store _____.",
+    answers: [
+      "1. Numbers and strings",
+      "2. Other arrays",
+      "3. Booleans",
+      "4. All of the Above",
+    ],
+    correct: "4. All of the Above",
+  },
+  {
+    question:
+      "String values must be enclosed within _____ when being assigned to values.",
+      answers: ["1. Commas", "2. Curly brackets", "3. Quotes", "4. Parenthesis"],
+      correct: "3. Quotes",
     },
-    {
-        question: "Commonly used data types do NOT include:",
-        answers: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
-        correct: "3. Alerts"
-    },
-    {
-        question: "The condition in an if/else statement is enclosed with _____.",
-        answers: ["1. Quotes", "2. Curly brackets", "3. Parenthesis", "4. Square brackets"],
-        correct: "3. Parenthesis"
-    },
-    {
-        question: "Arrays in Javascript can be used to store _____.",
-        answers: ["1. Numbers and strings", "2. Other arrays", "3. Booleans", "4. All of the Above"],
-        correct: "4. All of the Above"
-    },
-    {
-        question: "String values must be enclosed within _____ when being assigned to values.",
-        answers: ["1. Commas", "2. Curly brackets", "3. Quotes", "4. Parenthesis"],
-        correct: "3. Quotes"
-    }
-
 ];
+
+//high scores page with getItem to retrieve information
 
 
 function finishedQuiz() {
-    mainEl.textContent = "";
+  mainEl.textContent = "";
   var finalHeader = document.createElement("h3");
   finalHeader.textContent = "All Done!";
   finalHeader.className = "final-header";
@@ -58,156 +77,169 @@ function finishedQuiz() {
   finalContent.className = "final-content";
   mainEl.appendChild(finalContent);
   var finalScoreText = document.createElement("p");
-  finalScoreText.textContent = "Your final score is "; //+timeVariable;
+  finalScoreText.textContent = "Your final score is . Initials:"; // need to add timeVariable that equals score;
+  finalScoreText.className = "final-paragraph";
   finalContent.appendChild(finalScoreText);
   var scoreForm = document.createElement("form");
   scoreForm.className = "form";
+  finalContent.appendChild(scoreForm);
   var id = document.createElement("input");
   id.setAttribute("type", "text");
-  id.setAttribute("id", "initials")
+  id.setAttribute("id", "initials");
   var submitBtn = document.createElement("input");
   submitBtn.setAttribute("type", "submit");
   submitBtn.setAttribute("value", "Submit");
+  submitBtn.setAttribute("id", "submitBtn");
   scoreForm.appendChild(id);
   scoreForm.appendChild(submitBtn);
-  finalContent.appendChild(scoreForm);
-  
-  
+
   var initialsInput = document.querySelector("#initials");
-  submitBtn.addEventListener("click", function(event) {
-      event.preventDefault();
-      
-      var user = {
+    submitBtn.addEventListener("submit", function (event) {
+    event.preventDefault();
+    //submit button isn't working
+
+    var userScores = {
         initials: initialsInput.value.trim(),
-        // score: timer,
-      };
+        // need to add time value as score to add to local storage
+    };
+
+    localStorage.setItem(userScores);
+    });
     
-      
-      localStorage.setItem(user);
-  });
+    //go to high scores page
+
 }
 
 var questionFive = function () {
-    mainEl.textContent = "";
-    var question5 = document.createElement("h3");
-    question5.textContent = questionsObj[4].question;
-    mainEl.appendChild(question5);
+  mainEl.textContent = "";
+  var question5 = document.createElement("h3");
+  question5.textContent = questionsObj[4].question;
+  mainEl.appendChild(question5);
 
-  for (var i=0; i<questionsObj[4].answers.length; i++) {
-      var answersFive = document.createElement("button");
-      answersFive.className = "answer-buttons";
-      answersFive.textContent = questionsObj[4].answers[i];
-      mainEl.appendChild(answersFive);
-    }
+  //need to finish for loop to go to next question with click
+  for (var i = 0; i < questionsObj[4].answers.length; i++) {
+    var answersFive = document.createElement("button");
+    answersFive.className = "answer-buttons";
+    answersFive.textContent = questionsObj[4].answers[i];
+    mainEl.appendChild(answersFive);
+  }
+
+  finishedQuiz();
 };
 
 var questionFour = function () {
-    mainEl.textContent = "";
-    var question4 = document.createElement("h3");
-    question4.textContent = questionsObj[3].question;
-    mainEl.appendChild(question4);
+  mainEl.textContent = "";
+  var question4 = document.createElement("h3");
+  question4.textContent = questionsObj[3].question;
+  mainEl.appendChild(question4);
 
-  for (var i=0; i<questionsObj[3].answers.length; i++) {
-      var answersFour = document.createElement("button");
-      answersFour.className = "answer-buttons";
-      answersFour.textContent = questionsObj[3].answers[i];
-      mainEl.appendChild(answersFour);
-    }
+  //need to finish for loop to go to next question with click
+  for (var i = 0; i < questionsObj[3].answers.length; i++) {
+    var answersFour = document.createElement("button");
+    answersFour.className = "answer-buttons";
+    answersFour.textContent = questionsObj[3].answers[i];
+    mainEl.appendChild(answersFour);
+  }
+  questionFive();
 };
 
 var questionThree = function () {
-    mainEl.textContent = "";
-    var question3 = document.createElement("h3");
-    question3.textContent = questionsObj[2].question;
-    mainEl.appendChild(question3);
+  mainEl.textContent = "";
+  var question3 = document.createElement("h3");
+  question3.textContent = questionsObj[2].question;
+  mainEl.appendChild(question3);
 
-  for (var i=0; i<questionsObj[2].answers.length; i++) {
-      var answersThree = document.createElement("button");
-      answersThree.className = "answer-buttons";
-      answersThree.textContent = questionsObj[2].answers[i];
-      mainEl.appendChild(answersThree);
-    }
+  //need to finish for loop to go to next question with click
+  for (var i = 0; i < questionsObj[2].answers.length; i++) {
+    var answersThree = document.createElement("button");
+    answersThree.className = "answer-buttons";
+    answersThree.textContent = questionsObj[2].answers[i];
+    mainEl.appendChild(answersThree);
+  }
+
+  questionFour();
 };
 
 var questionTwo = function () {
-    var question2 = document.createElement("h3");
-    question2.textContent = questionsObj[1].question;
-    mainEl.appendChild(question2);
+  var question2 = document.createElement("h3");
+  question2.textContent = questionsObj[1].question;
+  mainEl.appendChild(question2);
 
-    for (var i=0; i<questionsObj[1].answers.length; i++) {
-      var answersTwo = document.createElement("button");
-      answersTwo.className = "answer-buttons";
-      answersTwo.textContent = questionsObj[1].answers[i];
-      mainEl.appendChild(answersTwo);
-    }
+  //need to finish for loop to go to next question with click
+  for (var i = 0; i < questionsObj[1].answers.length; i++) {
+    var answersTwo = document.createElement("button");
+    answersTwo.className = "answer-buttons";
+    answersTwo.textContent = questionsObj[1].answers[i];
+    mainEl.appendChild(answersTwo);
+  }
+
+  questionThree();
 };
-
-
 
 var questionOne = function () {
   var question1 = document.createElement("h3");
   question1.textContent = questionsObj[0].question;
   mainEl.appendChild(question1);
 
-  for (var i=0; i<questionsObj[0].answers.length; i++) {
-      var answersOne = document.createElement("button");
-      answersOne.className = "answer-buttons";
-      answersOne.textContent = questionsObj[0].answers[i];
-      answersOne.addEventListener("click", function (event) {
-          if (event.target(questionsObj[0].answers[3])) {
-              var alertCorrect = document.createElement("p");
-              alertCorrect.textContent = "Correct!";
-              alertCorrect.className = "answer-alert";
-              mainEl.appendChild(alertCorrect);
-              questionTwo();
-            }
-            else {
-                var alertWrong = document.createElement("p");
-                alertWrong.textContent = "Wrong!";
-                alertWrong.className = "answer-alert";
-                mainEl.appendChild(alertWrong);
-                // timer = timer - 10;
-                questionTwo();
-            }
-        });
-        mainEl.appendChild(answersOne);
+  for (var i = 0; i < questionsObj[0].answers.length; i++) {
+    var answersOne = document.createElement("button");
+    answersOne.className = "answer-buttons";
+    answersOne.textContent = questionsObj[0].answers[i];
+    mainEl.appendChild(answersOne);
+  }
+  // why isn't the else loop working?
+  answersOne.addEventListener("click", function () {
+    if (questionsObj[0].answers[3]) {
+      var alertCorrect = document.createElement("p");
+      alertCorrect.textContent = "Correct!";
+      alertCorrect.className = "answer-alert";
+      mainEl.appendChild(alertCorrect);
+    //   questionTwo();
+    finishedQuiz()
+    } else if (!questionsObj[0].answers[3]) {
+      var alertWrong = document.createElement("p");
+      alertWrong.textContent = "Wrong!";
+      alertWrong.className = "answer-alert";
+      mainEl.appendChild(alertWrong);
+      // timer = timer - 10; <- need help making timer work
+      questionTwo();
     }
+  });
 };
 
-
 function sortQuestions() {
-    mainEl.textContent = "";
-    questionOne();
-
+  mainEl.textContent = "";
+  questionOne();
 }
 
-
-
 function countdown() {
-    var timeInterval = setInterval(function () {
-        if (timer.timeStart > 0) {
-            timerEl.textContent = "Time: " + timer.timeStart;
-            timer.timeStart--;
-        } else {
-            timerEl.textContent = "";
-            clearInterval(timeInterval);
-            alert("Time has ended. Quiz is over.");
-        }
-    }, 1000);
+  var timeInterval = setInterval(function () {
+    if (timer.timeStart > 0) {
+      timerEl.textContent = "Time: " + timer.timeStart;
+      timer.timeStart--;
+    }
+    // how to I stop the timer when the finishedQuiz page is reached?
+    //how to I get time left to equal score
+    // else if (finishedQuiz()) {
+    //     timerEl.textContent = "";
+    //   clearInterval(timeInterval);
+    // }
+    else {
+        timerEl.textContent = "";
+        clearInterval(timeInterval);
+        alert("Time has ended. Quiz is over.");
+    }
+
+  }, 1000);
 }
 
 function startQuiz() {
-    console.log("click");
-    sortQuestions();
-    countdown();
+  console.log("click");
+  countdown();
+  sortQuestions();
 }
 
 startBtn.addEventListener("click", startQuiz);
-
-
-
-
-
 
 // var questionOne = function() {
 //     var question1El = document.createElement("div")
@@ -366,5 +398,3 @@ startBtn.addEventListener("click", startQuiz);
 //     q5Answer4.className = "answer-buttons";
 //     question5El.appendChild(q5Answer4);
 // }
-
-
