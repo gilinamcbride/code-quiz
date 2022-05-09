@@ -5,6 +5,7 @@ var sectionEl = document.querySelector("#section");
 var startBtn = document.querySelector("#startBtn");
 var goBackBtn = document.querySelector("#go-back-btn");
 var timeLeft = 60;
+var userScores = [];
 
 var questionsObj = [
   {
@@ -248,10 +249,11 @@ function finishedQuiz() {
   initialsInput.setAttribute("id", "initials");
   scoreForm.appendChild(initialsInput);
 
-  var submitBtn = document.createElement("input");
+  var submitBtn = document.createElement("button");
   submitBtn.setAttribute("type", "submit");
   submitBtn.setAttribute("value", "Submit");
   submitBtn.setAttribute("id", "submitBtn");
+  submitBtn.textContent = "Submit";
   scoreForm.appendChild(submitBtn);
 
   submitBtn.addEventListener("submit", function (event) {
@@ -259,21 +261,25 @@ function finishedQuiz() {
     //submit button isn't working - taking back to main page
 
     var userScores = {
-        initials: initialsInput.value.trim(),
+        initials: initialsInput.value,
         highScore: timeLeft
     };
 
+
     console.log(userScores);
 
-    localStorage.setItem("userScores", JSON.stringify(userScores));
+    // localStorage.setItem("userScores", JSON.stringify(userScores));
 
-    window.location.href = "highscores.html";
+    // window.location.href = "highscores.html";
+    saveScores();
     highScores();
   });
-
-    
-
 }
+
+//how to get userScores variable into this function?
+var saveScores = function() {
+  localStorage.setItem("userScores", JSON.stringify(userScores));
+}; 
 
 function countdown() {
   var timeInterval = setInterval(function () {
@@ -299,8 +305,7 @@ function countdown() {
 
 function startQuiz() {
   countdown();
-  // questionOne();
-  questions();
+  questionOne();
 };
 
 startBtn.addEventListener("click", startQuiz); 
