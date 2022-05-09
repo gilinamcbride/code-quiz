@@ -14,8 +14,12 @@ header {
     justify-content: space-between;
 }
 
+body {
+    margin: 25px 50px;
+}
+
 .main {
-    padding: 20px;
+    padding: 25px 50px;
     text-align: center;
     margin: 10px auto;
     display: flex;
@@ -56,10 +60,12 @@ header {
     /* border-radius: 10%; */
     font-size: 20px;
     border: none;
+    margin: auto;
 }
-/* .start-btn:hover {
+.start-btn:hover {
     background-color: lightgray;
-} */
+    color: black;
+}
 
 .answer-buttons {
     width: 250px;
@@ -71,6 +77,11 @@ header {
     font-size: 16px;
     border: none;
     text-align: left;
+}
+
+.answer-buttons:hover {
+    background-color: lightgray;
+    color: black;
 }
 
 .answer-alert {
@@ -85,25 +96,21 @@ header {
     display: flex;
     flex: wrap;
     justify-content: auto;
-    border: yellow solid 5px;
     margin: auto;
 }
 
 .final-header {
-    padding: 20px;
-    border: black solid 5px;
+    padding: 10px;
     margin: auto;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 .final-content p {
-    border: pink solid 5px;
     font-size: 20px;
-    padding: 25px 0 0 0;
+    padding: 25px 10px 0 0;
 }
 
 .form {
-    border: red solid 5px;
     padding: 20px 0;
 }
 
@@ -118,6 +125,18 @@ header {
     font-size: 20px;
     border: none;
     margin: 10px;
+}
+
+.scores-btn:hover {
+    background-color: lightgray;
+    color: black;
+}
+#section {
+    padding: 10px 50px;
+}
+
+#section p {
+    padding-top: 15px;
 }
 
 #submitBtn {
@@ -138,6 +157,10 @@ header {
     font-weight: bold;
     color: var(--primary-color);
     padding: 20px 50px; 
+}
+
+#high-scores:hover {
+    color: black;
 }
 
 #timer {
