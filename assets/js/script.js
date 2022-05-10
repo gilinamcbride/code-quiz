@@ -1,9 +1,14 @@
 //elements/variables/objects
 var mainEl = document.querySelector("#main");
 var timerEl = document.querySelector("#timer");
-var sectionEl = document.querySelector("#section");
+var sectionEl = document.querySelector("#feedback");
 var startBtn = document.querySelector("#startBtn");
-var goBackBtn = document.querySelector("#go-back-btn");
+var finalPage = document.querySelector("#final-content");
+var scoreSection = document.querySelector("#score-section");
+var timeInterval;
+var scoreListEl = document.querySelector("#score-list");
+var submitBtn = document.querySelector("#submitBtn");
+var initialsEl = document.querySelector("#initials");
 var timeLeft = 60;
 var userScores = [];
 
@@ -54,6 +59,21 @@ var questionsObj = [
 
 
 //functions
+
+function countdown() {
+  timeInterval = setInterval(function () {
+    if (timeLeft > 0) {
+      timerEl.textContent = "Time: " + timeLeft;
+      timeLeft--;
+    }
+    else {
+        timerEl.textContent = "";
+        clearInterval(timeInterval);
+        alert("Time has ended. Quiz is over.");
+    }
+
+  }, 1000);
+}
 
 var questionOne = function () {
   mainEl.textContent = "";
@@ -224,108 +244,65 @@ var questionFive = function () {
 
 
 function finishedQuiz() {
-  mainEl.textContent = "";
-  var finalHeader = document.createElement("h3");
-  finalHeader.textContent = "All Done!";
-  finalHeader.className = "final-header";
-  mainEl.appendChild(finalHeader);
+  clearInterval(timeInterval);
+  timerEl.remove();
+  mainEl.remove();
 
-  var finalContent = document.createElement("div");
-  finalContent.className = "final-content";
-  mainEl.appendChild(finalContent);
+  finalPage.removeAttribute("class", "hide");
+  finalPage.setAttribute("class", "final-content");
 
   var finalScoreText = document.createElement("p");
-  finalScoreText.innerHTML = "Your score is " + timeLeft + ". Initials:";
+  finalScoreText.innerHTML = "Your score is " + timeLeft + ".";
   finalScoreText.className = "final-paragraph";
-  finalContent.appendChild(finalScoreText);
+  scoreSection.appendChild(finalScoreText);
+}
 
-  var scoreForm = document.createElement("form");
-  scoreForm.className = "form";
-  finalContent.appendChild(scoreForm);
+function saveScores() {
+  var initials = initialsEl.value.trim();
 
-  var initialsInput = document.createElement("input");
-  initialsInput.setAttribute("type", "text");
-  initialsInput.setAttribute("value", "");
-  initialsInput.setAttribute("id", "initials");
-  scoreForm.appendChild(initialsInput);
-
-  var submitBtn = document.createElement("button");
-  submitBtn.setAttribute("type", "submit");
-  submitBtn.setAttribute("value", "Submit");
-  submitBtn.setAttribute("id", "submitBtn");
-  submitBtn.textContent = "Submit";
-  scoreForm.appendChild(submitBtn);
-
-  submitBtn.addEventListener("submit", function (event) {
-    event.preventDefault();
-    //submit button isn't working - taking back to main page
+  if (initials !== "") {
+    var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
     var userScores = {
-        initials: initialsInput.value,
-        highScore: timeLeft
-    };
-
-
-    console.log(userScores);
-
-    // localStorage.setItem("userScores", JSON.stringify(userScores));
-
-    // window.location.href = "highscores.html";
-    saveScores();
-    highScores();
-  });
+          initials: initials,
+          score: timeLeft
+        };
+    highScores.push(userScores);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+  }
+  window.location.href = "highscores.html";
+  
 }
 
-//how to get userScores variable into this function?
-var saveScores = function() {
-  localStorage.setItem("userScores", JSON.stringify(userScores));
-}; 
+// retrieveScores();
+// function retrieveScores() {
+  // var userData = JSON.parse(locaStorage.getItem("highScores"));
+  // var scoreListItem = document.createElement("li");
+  // scoreListItem.textContent = highScores.initials + ": " + highScores.score;
+  // scoreListEl.appendChild(scoreListItem);
+  
 
-function countdown() {
-  var timeInterval = setInterval(function () {
-    if (timeLeft > 0) {
-      timerEl.textContent = "Time: " + timeLeft;
-      timeLeft--;
-    }
-    // how to I stop the timer when the finishedQuiz page is reached?
-    //how to I get time left to equal score
-    // else if (timeLeft > 0 && finishedQuiz()) {
-    //   timerEl.textContent = "";
-      // timeLeft = timeLeft
-    //   clearInterval(timeInterval);
-    // }
-    else {
-        timerEl.textContent = "";
-        clearInterval(timeInterval);
-        alert("Time has ended. Quiz is over.");
-    }
+// }
 
-  }, 1000);
-}
+
+
 
 function startQuiz() {
   countdown();
   questionOne();
 };
 
-startBtn.addEventListener("click", startQuiz); 
-
-
-
-function highScores() {
-  var userData = JSON.parse(localStorage.getItem("user"));
-  var divEl = document.querySelector(".scores");
-  
-  var scoresEl = document.createElement("p");
-  scoresEl.textContent = userData.initials + "=" + userData.highScore;
-  scoresEl.className = "high-score-element";
-  divEl.appendChild(scoresEl);
-  
+function checkForEnter(event) {
+  if (event.key === "Enter") {
+    saveScores();
+  }
 }
 
 
-// goBackBtn.addEventListener("click", function() {
-//   window.location.href = "./index.html";
-// });
+submitBtn.addEventListener("click", saveScores);
+
+startBtn.addEventListener("click", startQuiz);
+
+initialsEl.onkeyup = checkForEnter;
 
 

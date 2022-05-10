@@ -18,6 +18,10 @@ body {
     margin: 25px 50px;
 }
 
+.hide {
+    visibility: hidden;
+}
+
 .main {
     padding: 25px 50px;
     text-align: center;
@@ -42,14 +46,6 @@ body {
     text-align: left;
 }
 
-/* .question-area {
-    margin: 10px auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: left;
-} */
-
 .start-btn  {
     width: 250px;
     flex-direction: row;
@@ -57,7 +53,6 @@ body {
     padding: 10px 20px;
     color: white;
     background-color: var(--primary-color);
-    /* border-radius: 10%; */
     font-size: 20px;
     border: none;
     margin: auto;
@@ -96,10 +91,12 @@ body {
     display: flex;
     flex: wrap;
     justify-content: auto;
+    flex-direction: column;
+    align-items: center;
     margin: auto;
 }
 
-.final-header {
+.final-content h2 {
     padding: 10px;
     margin: auto;
     font-size: 35px;
@@ -110,10 +107,6 @@ body {
     padding: 25px 10px 0 0;
 }
 
-.form {
-    padding: 20px 0;
-}
-
 .scores-btn {
     width: 250px;
     flex-direction: row;
@@ -121,7 +114,6 @@ body {
     padding: 10px 20px;
     color: white;
     background-color: var(--primary-color);
-    /* border-radius: 10%; */
     font-size: 20px;
     border: none;
     margin: 10px;
@@ -131,11 +123,11 @@ body {
     background-color: lightgray;
     color: black;
 }
-#section {
+#feedback {
     padding: 10px 50px;
 }
 
-#section p {
+#feedback p {
     padding-top: 15px;
 }
 
@@ -146,6 +138,11 @@ body {
     margin-left: 20px;
     padding: 5px 20px;
     font-size: 20px;
+}
+
+#submitBtn:hover {
+    background-color: lightgray;
+    color: black;
 }
 
 #initials {
