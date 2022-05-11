@@ -52,11 +52,10 @@ var questionsObj = [
   {
     question:
       "String values must be enclosed within _____ when being assigned to values.",
-      answers: ["1. Commas", "2. Curly brackets", "3. Quotes", "4. Parenthesis"],
-      correct: "3. Quotes",
-    },
+    answers: ["1. Commas", "2. Curly brackets", "3. Quotes", "4. Parenthesis"],
+    correct: "3. Quotes",
+  },
 ];
-
 
 //functions
 
@@ -65,13 +64,12 @@ function countdown() {
     if (timeLeft > 0) {
       timerEl.textContent = "Time: " + timeLeft;
       timeLeft--;
+    } else {
+      timerEl.textContent = "";
+      clearInterval(timeInterval);
+      alert("Time has ended. Quiz is over.");
+      window.location.href = "highscores.html";
     }
-    else {
-        timerEl.textContent = "";
-        clearInterval(timeInterval);
-        alert("Time has ended. Quiz is over.");
-    }
-
   }, 1000);
 }
 
@@ -81,7 +79,7 @@ var questionOne = function () {
   question1.textContent = questionsObj[0].question;
   mainEl.appendChild(question1);
 
-  questionsObj[0].answers.forEach(function(answer) {
+  questionsObj[0].answers.forEach(function (answer) {
     var answerBtnEl = document.createElement("button");
     answerBtnEl.textContent = answer;
     answerBtnEl.className = "answer-buttons";
@@ -99,13 +97,13 @@ var questionOne = function () {
         alertCorrect.className = "answer-alert";
         sectionEl.appendChild(alertCorrect);
       }
-      
+
       question1.remove();
       mainEl.textContent = "";
       questionTwo();
-    }
+    };
     mainEl.appendChild(answerBtnEl);
-  })
+  });
 };
 
 var questionTwo = function () {
@@ -113,7 +111,7 @@ var questionTwo = function () {
   question2.textContent = questionsObj[1].question;
   mainEl.appendChild(question2);
 
-  questionsObj[1].answers.forEach(function(answer) {
+  questionsObj[1].answers.forEach(function (answer) {
     var answerBtnEl = document.createElement("button");
     answerBtnEl.textContent = answer;
     answerBtnEl.className = "answer-buttons";
@@ -136,9 +134,9 @@ var questionTwo = function () {
       question2.remove();
       mainEl.textContent = "";
       questionThree();
-    }
+    };
     mainEl.appendChild(answerBtnEl);
-  })
+  });
 };
 
 var questionThree = function () {
@@ -146,7 +144,7 @@ var questionThree = function () {
   question3.textContent = questionsObj[2].question;
   mainEl.appendChild(question3);
 
-  questionsObj[2].answers.forEach(function(answer) {
+  questionsObj[2].answers.forEach(function (answer) {
     var answerBtnEl = document.createElement("button");
     answerBtnEl.textContent = answer;
     answerBtnEl.className = "answer-buttons";
@@ -169,9 +167,9 @@ var questionThree = function () {
       question3.remove();
       mainEl.textContent = "";
       questionFour();
-    }
+    };
     mainEl.appendChild(answerBtnEl);
-  })
+  });
 };
 
 var questionFour = function () {
@@ -179,7 +177,7 @@ var questionFour = function () {
   question4.textContent = questionsObj[3].question;
   mainEl.appendChild(question4);
 
-  questionsObj[3].answers.forEach(function(answer) {
+  questionsObj[3].answers.forEach(function (answer) {
     var answerBtnEl = document.createElement("button");
     answerBtnEl.textContent = answer;
     answerBtnEl.className = "answer-buttons";
@@ -202,9 +200,9 @@ var questionFour = function () {
       question4.remove();
       mainEl.textContent = "";
       questionFive();
-    }
+    };
     mainEl.appendChild(answerBtnEl);
-  })
+  });
 };
 
 var questionFive = function () {
@@ -212,7 +210,7 @@ var questionFive = function () {
   question5.textContent = questionsObj[4].question;
   mainEl.appendChild(question5);
 
-  questionsObj[4].answers.forEach(function(answer) {
+  questionsObj[4].answers.forEach(function (answer) {
     var answerBtnEl = document.createElement("button");
     answerBtnEl.textContent = answer;
     answerBtnEl.className = "answer-buttons";
@@ -236,12 +234,10 @@ var questionFive = function () {
       mainEl.textContent = "";
       sectionEl.textContent = "";
       finishedQuiz();
-    }
+    };
     mainEl.appendChild(answerBtnEl);
-  })
+  });
 };
-
-
 
 function finishedQuiz() {
   clearInterval(timeInterval);
@@ -264,33 +260,22 @@ function saveScores() {
     var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
     var userScores = {
-          initials: initials,
-          score: timeLeft
-        };
+      initials: initials,
+      score: timeLeft,
+    };
     highScores.push(userScores);
     localStorage.setItem("highScores", JSON.stringify(highScores));
+  } else {
+    alert("You must enter your initials!");
+    return;
   }
   window.location.href = "highscores.html";
-  
 }
-
-// retrieveScores();
-// function retrieveScores() {
-  // var userData = JSON.parse(locaStorage.getItem("highScores"));
-  // var scoreListItem = document.createElement("li");
-  // scoreListItem.textContent = highScores.initials + ": " + highScores.score;
-  // scoreListEl.appendChild(scoreListItem);
-  
-
-// }
-
-
-
 
 function startQuiz() {
   countdown();
   questionOne();
-};
+}
 
 function checkForEnter(event) {
   if (event.key === "Enter") {
@@ -298,11 +283,8 @@ function checkForEnter(event) {
   }
 }
 
-
 submitBtn.addEventListener("click", saveScores);
 
 startBtn.addEventListener("click", startQuiz);
 
 initialsEl.onkeyup = checkForEnter;
-
-
