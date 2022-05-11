@@ -10,6 +10,10 @@ goBackBtn.addEventListener("click", goBack);
 
 function retrieveScores() {
   var userData = JSON.parse(localStorage.getItem("highScores")) || [];
+  userData.sort((a, b) => {
+    return b.score - a.score;
+  });
+  console.log(userData);
   for (var i = 0; i < userData.length; i++) {
     var scoreListItem = document.createElement("p");
     scoreListItem.className = "scores-list";
