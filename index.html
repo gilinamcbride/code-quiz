@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding Quiz Challenge</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
     <header class="header">
-        <a id="high-scores" href="./highscores.html">View High Scores</a>
-        <p id="timer">Time: 60</p>
+      <a id="high-scores" href="./highscores.html">View High Scores</a>
+      <p id="timer">Time: 60</p>
     </header>
     <main class="main" id="main">
-        <h2>Coding Quiz Challenge</h2>
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-        <button type="submit" id="startBtn" class="start-btn">Start Quiz</button>
+      <h2>Coding Quiz Challenge</h2>
+      <p>
+        Try to answer the following code-related questions within the time
+        limit. Keep in mind that incorrect answers will penalize your score/time
+        by ten seconds!
+      </p>
+      <button type="submit" id="startBtn" class="start-btn">Start Quiz</button>
     </main>
-    
+
     <section id="final-content" class="hide">
-        <h2>All Done!</h2>
-        <div id="score-section"></div>
-        <p>
-            Enter Initials: <input type="text" id="initials" max="3" />
-            <button type="submit" id="submitBtn">Submit</button>
-        </p>
+      <h2>All Done!</h2>
+      <div id="score-section"></div>
+      <p>
+        Enter Initials: <input type="text" id="initials" max="3" />
+        <button type="submit" id="submitBtn">Submit</button>
+      </p>
     </section>
     <section id="feedback"></section>
     <script type="text/javascript" src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>
-

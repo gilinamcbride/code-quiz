@@ -6,7 +6,6 @@ var startBtn = document.querySelector("#startBtn");
 var finalPage = document.querySelector("#final-content");
 var scoreSection = document.querySelector("#score-section");
 var timeInterval;
-var scoreListEl = document.querySelector("#score-list");
 var submitBtn = document.querySelector("#submitBtn");
 var initialsEl = document.querySelector("#initials");
 var timeLeft = 60;
