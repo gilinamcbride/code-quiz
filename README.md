@@ -24,4 +24,4 @@
 
 ![Code Quiz Homepage Image](./assets/images/quiz_home.png)
 
-[Link to deployed application](https://gilinamcbride.github.io/challenge4-code-quiz/)
+[Link to deployed application](https://gilinamcbride.github.io/code-quiz/)
