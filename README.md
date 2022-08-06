@@ -1,5 +1,7 @@
 # Challenge 4 - Code Quiz
 
+This app is a Coding Quiz that runs in the browser, and features dynamically updated HTML and CSS powered by JavaScript.
+
 ## User Story
 
 - AS A coding boot camp student
@@ -25,3 +27,7 @@
 ![Code Quiz Homepage Image](./assets/images/quiz_home.png)
 
 [Link to deployed application](https://gilinamcbride.github.io/code-quiz/)
+
+## Questions?
+
+For any questions, please email gilinamcbride@gmail.com, or visit any other projects on [Github](github.com/gilinamcbride).
